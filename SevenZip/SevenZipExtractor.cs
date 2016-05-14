@@ -67,7 +67,7 @@ namespace SevenZip
         /// <summary>
         /// This is used to lock possible Dispose() calls.
         /// </summary>
-        private bool _asynchronousDisposeLock;
+        private bool _asynchronousDisposeLock = true;
 
         #region Constructors
         /// <summary>
@@ -760,7 +760,8 @@ namespace SevenZip
             _archiveFileData = null;
             _archiveProperties = null;
             _archiveFileInfoCollection = null;
-            _inStream.Dispose();
+            if (_inStream != null)
+               _inStream.Dispose();
             _inStream = null;
             if (_openCallback != null)
             {
